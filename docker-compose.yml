@@ -24,10 +24,39 @@ services:
     build: .
     container_name: backend-minut
     restart: always
-    env_file:
-      - .env
     environment:
+      # Database Config
       - DB_HOST=postgres
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      # SIMRS Config
+      - SIMRS_DB_HOST=${SIMRS_DB_HOST}
+      - SIMRS_DB_PORT=${SIMRS_DB_PORT}
+      - SIMRS_DB_USER=${SIMRS_DB_USER}
+      - SIMRS_DB_PASSWORD=${SIMRS_DB_PASSWORD}
+      - SIMRS_DB_NAME=${SIMRS_DB_NAME}
+      # JWT Config
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRES_IN=${JWT_EXPIRES_IN}
+      # Server Config
+      - PORT=${PORT}
+      - NODE_ENV=${NODE_ENV}
+      # Auth Config
+      - AUTH_USERNAME=${AUTH_USERNAME}
+      - AUTH_PASSWORD=${AUTH_PASSWORD}
+      # Admedika Config
+      - ADMEDIKA_BASE_URL_PROD=${ADMEDIKA_BASE_URL_PROD}
+      - ADMEDIKA_CUSTOMER_ID=${ADMEDIKA_CUSTOMER_ID}
+      - ADMEDIKA_SECURITY_WORD=${ADMEDIKA_SECURITY_WORD}
+      - ADMEDIKA_TERMINAL_ID=${ADMEDIKA_TERMINAL_ID}
+      # S3 Config
+      - S3_ENDPOINT=${S3_ENDPOINT}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY}
+      - S3_SECRET_KEY=${S3_SECRET_KEY}
+      - S3_BUCKET=${S3_BUCKET}
+      - S3_REGION=${S3_REGION}
     ports:
       - "0.0.0.0:3005:3000"  # Bind to all interfaces
     depends_on:
