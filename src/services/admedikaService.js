@@ -1104,12 +1104,12 @@ class AdmedikaService {
 
       // Create FormData
 
-      // Kirim field 'data' (JSON string) dan 'files' (base64 string) di FormData
+      // Kirim field 'data' (JSON string) dan 'files' (binary file) di FormData
       const formData = new FormData();
       const dataPayload = JSON.stringify(apiPayload.input);
       formData.append('data', dataPayload);
-      const fileBase64 = file.buffer.toString('base64');
-      formData.append('files', fileBase64, {
+      // Send file as binary buffer, not base64 string
+      formData.append('files', file.buffer, {
         filename: file.originalname,
         contentType: file.mimetype
       });
