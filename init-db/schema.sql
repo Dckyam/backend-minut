@@ -535,8 +535,20 @@ CREATE INDEX idx_registrasi_no_registrasi ON public.registrasi_pasien_admedika U
 
 
 --
--- PostgreSQL database dump complete
+--
+-- Data for Name: coverage_type_admedika; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-\unrestrict u4dTVcWObwoBgTt1nEyGXdiPNI3XwabhsDikMXY3ywzi28HFbL7rNMtXbaTrrrs
+INSERT INTO public.coverage_type_admedika (coverage_id, coverage_code, description) VALUES
+('01', 'HNS', 'RAWAT INAP'),
+('02', 'GP', 'RAWAT JALAN'),
+('03', 'SP', 'PRE & POST'),
+('04', 'OP', 'KACAMATA'),
+('05', 'DENTAL', 'RAWAT GIGI'),
+('06', 'MAT', 'PERSALINAN'),
+('07', 'LAB', 'LABORATORY'),
+('08', 'PHAR', 'PHARMACY/APOTEK');
 
+
+-- PostgreSQL database dump complete
+--
