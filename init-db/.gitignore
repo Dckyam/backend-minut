@@ -1,5 +1,8 @@
 # Ignore all SQL backup files (karena bisa mengandung data sensitif)
-*.sql
+# *.sql
+
+# Keep schema.sql for database initialization
+!schema.sql
 
 # Keep README
 !README.md
