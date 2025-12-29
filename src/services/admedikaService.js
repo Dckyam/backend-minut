@@ -1104,16 +1104,15 @@ class AdmedikaService {
 
       // Create FormData
 
-      // Per dokumentasi EDOCS_UPLOAD:
+      // Per dokumentasi EDOCS_UPLOAD - menggunakan form-data standard:
       // - Field 'data' berisi complete JSON input request format
-      // - Field 'files' berisi file source (any file type) - converted to base64
+      // - Field 'files' berisi file source (binary file)
       const formData = new FormData();
       const dataPayload = JSON.stringify(apiPayload.input);
       formData.append('data', dataPayload);
 
-      // Convert file to base64 as per requirement
-      const fileBase64 = file.buffer.toString('base64');
-      formData.append('files', fileBase64, {
+      // Send file as binary buffer (standard multipart/form-data)
+      formData.append('files', file.buffer, {
         filename: file.originalname,
         contentType: file.mimetype
       });
