@@ -1,0 +1,5 @@
+# Ignore all SQL backup files (karena bisa mengandung data sensitif)
+*.sql
+
+# Keep README
+!README.md
