@@ -1131,8 +1131,8 @@ class AdmedikaService {
 
 
       // Call Admedika API
-      // Khusus uploadDocument, gunakan URL dari .env ADMEDIKA_BASE_URL_PROD
-      const uploadUrl = process.env.ADMEDIKA_BASE_URL_PROD || config.admedika.baseUrl;
+      // Khusus uploadDocument, gunakan URL khusus dari .env ADMEDIKA_UPLOAD_BASE_URL
+      const uploadUrl = process.env.ADMEDIKA_UPLOAD_BASE_URL || process.env.ADMEDIKA_BASE_URL_PROD || config.admedika.baseUrl;
       console.log('📡 Upload URL:', uploadUrl);
 
       const response = await axios.post(uploadUrl, formData, {
