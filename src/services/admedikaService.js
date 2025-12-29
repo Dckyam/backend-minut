@@ -1104,11 +1104,14 @@ class AdmedikaService {
 
       // Create FormData
 
-      // Kirim field 'data' (JSON string) dan 'files' (base64 string) di FormData
+      // Per dokumentasi EDOCS_UPLOAD:
+      // - Field 'data' berisi complete JSON input request format
+      // - Field 'files' berisi file source (any file type) - converted to base64
       const formData = new FormData();
       const dataPayload = JSON.stringify(apiPayload.input);
       formData.append('data', dataPayload);
-      // Convert file to base64 as per Admedika EDOCS_UPLOAD documentation
+
+      // Convert file to base64 as per requirement
       const fileBase64 = file.buffer.toString('base64');
       formData.append('files', fileBase64, {
         filename: file.originalname,
