@@ -88,9 +88,9 @@ class AdmedikaController {
    */
   async getRegistrasiByNoReg(req, res) {
     try {
-      const { noClaim } = req.params;
+      const { noRegistrasi } = req.params;
 
-      if (!noClaim) {
+      if (!noRegistrasi) {
         return res.status(400).json({
           success: false,
           message: 'No registrasi is required'
@@ -365,13 +365,13 @@ class AdmedikaController {
    */
   async getTransaksiMapping(req, res) {
     try {
-      const { noClaim } = req.params;
+      const { noRegistrasi } = req.params;
 
       // Validasi input
-      if (!noClaim) {
+      if (!noRegistrasi) {
         return res.status(400).json({
           success: false,
-          message: 'noClaim is required'
+          message: 'noRegistrasi is required'
         });
       }
 
@@ -1375,6 +1375,64 @@ class AdmedikaController {
           error: error.message
         });
       }
+    }
+  }
+
+  /**
+   * Get presigned URL for viewing document
+   * GET /api/admedika/view-document/:id
+   */
+  async viewDocument(req, res) {
+    try {
+      const { id } = req.params;
+
+      if (!id) {
+        return res.status(400).json({
+          success: false,
+          message: 'Document ID is required'
+        });
+      }
+
+      // Get document info from database
+      const db = require('../config/database');
+      const result = await db.query('SELECT * FROM upload_document_admedika WHERE id = $1', [id]);
+
+      if (result.rows.length === 0) {
+        return res.status(404).json({
+          success: false,
+          message: 'Document not found'
+        });
+      }
+
+      const document = result.rows[0];
+      const s3Service = require('../services/s3Service');
+
+      console.log('👁️ Generating view URL for document:', {
+        id: id,
+        s3Key: document.file_path,
+        fileName: document.file_name
+      });
+
+      // Generate presigned URL (valid for 1 hour)
+      const presignedUrl = await s3Service.getPresignedUrl(document.file_path, 3600);
+
+      res.json({
+        success: true,
+        data: {
+          url: presignedUrl,
+          fileName: document.file_name,
+          contentType: document.file_name.endsWith('.pdf') ? 'application/pdf' : 'image/*',
+          expiresIn: 3600
+        }
+      });
+
+    } catch (error) {
+      console.error('Controller error - viewDocument:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error generating view URL',
+        error: error.message
+      });
     }
   }
 

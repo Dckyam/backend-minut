@@ -75,6 +75,9 @@ router.get('/upload-history/:noClaim', authMiddleware, admedikaController.getUpl
 // Download Document - Protected dengan JWT
 router.get('/download-document/:id', authMiddleware, admedikaController.downloadDocument);
 
+// View Document - Protected dengan JWT
+router.get('/view-document/:id', authMiddleware, admedikaController.viewDocument);
+
 // Get Member Enrolled Plan TC - Protected dengan JWT
 router.post('/member-enrolled-plan-tc', authMiddleware, admedikaController.getMemberEnrolledPlanTC);
 

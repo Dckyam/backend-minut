@@ -28,11 +28,11 @@ class S3Service {
    */
   async uploadFile(fileBuffer, fileName, contentType, metadata = {}) {
     try {
-      // Generate unique key: documents/{no_registrasi}/{timestamp}_{filename}
+      // Generate unique key: documents/{no_claim}/{timestamp}_{filename}
       const timestamp = Date.now();
       const sanitizedFileName = fileName.replace(/[^a-zA-Z0-9.-]/g, '_');
-      const s3Key = metadata.no_registrasi
-        ? `documents/${metadata.no_registrasi}/${timestamp}_${sanitizedFileName}`
+      const s3Key = metadata.no_claim
+        ? `documents/${metadata.no_claim}/${timestamp}_${sanitizedFileName}`
         : `documents/general/${timestamp}_${sanitizedFileName}`;
 
       console.log('📤 Uploading file to S3:', {
