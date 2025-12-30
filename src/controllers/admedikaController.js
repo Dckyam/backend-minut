@@ -88,9 +88,9 @@ class AdmedikaController {
    */
   async getRegistrasiByNoReg(req, res) {
     try {
-      const { noRegistrasi } = req.params;
+      const { noClaim } = req.params;
 
-      if (!noRegistrasi) {
+      if (!noClaim) {
         return res.status(400).json({
           success: false,
           message: 'No registrasi is required'
@@ -365,13 +365,13 @@ class AdmedikaController {
    */
   async getTransaksiMapping(req, res) {
     try {
-      const { noRegistrasi } = req.params;
+      const { noClaim } = req.params;
 
       // Validasi input
-      if (!noRegistrasi) {
+      if (!noClaim) {
         return res.status(400).json({
           success: false,
-          message: 'noRegistrasi is required'
+          message: 'noClaim is required'
         });
       }
 
@@ -1291,20 +1291,20 @@ class AdmedikaController {
 
   /**
    * Get upload document history
-   * GET /api/admedika/upload-history/:noRegistrasi
+   * GET /api/admedika/upload-history/:noClaim
    */
   async getUploadHistory(req, res) {
     try {
-      const { noRegistrasi } = req.params;
+      const { noClaim } = req.params;
 
-      if (!noRegistrasi) {
+      if (!noClaim) {
         return res.status(400).json({
           success: false,
-          message: 'noRegistrasi is required'
+          message: 'noClaim is required'
         });
       }
 
-      const result = await admedikaService.getUploadHistory(noRegistrasi);
+      const result = await admedikaService.getUploadHistory(noClaim);
 
       const statusCode = result.success ? 200 : 404;
       res.status(statusCode).json(result);

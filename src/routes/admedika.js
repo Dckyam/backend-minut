@@ -70,7 +70,7 @@ router.post('/hello-world', authMiddleware, admedikaController.helloWorld);
 router.post('/upload-document', authMiddleware, upload.single('file'), admedikaController.uploadDocument);
 
 // Get Upload History - Protected dengan JWT
-router.get('/upload-history/:noRegistrasi', authMiddleware, admedikaController.getUploadHistory);
+router.get('/upload-history/:noClaim', authMiddleware, admedikaController.getUploadHistory);
 
 // Download Document - Protected dengan JWT
 router.get('/download-document/:id', authMiddleware, admedikaController.downloadDocument);

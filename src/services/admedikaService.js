@@ -1239,9 +1239,9 @@ class AdmedikaService {
   /**
    * Get upload document history
    */
-  async getUploadHistory(noRegistrasi) {
+  async getUploadHistory(noClaim) {
     try {
-      const history = await AdmedikaModel.getUploadHistoryByNoRegistrasi(noRegistrasi);
+      const history = await AdmedikaModel.getUploadHistoryByNoClaim(noRegistrasi);
 
       if (!history || history.length === 0) {
         return {

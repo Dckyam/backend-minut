@@ -76,9 +76,9 @@ class AdmedikaModel {
           claim_status, claim_desc, is_void, void_by, void_date, void_remarks,
           is_claim, claim_by, claim_date, created_by, created_date
         FROM registrasi_pasien_admedika
-        WHERE no_registrasi = $1 AND is_void = 0
+        WHERE no_claim = $1 AND is_void = 0
       `;
-      const result = await db.query(query, [noRegistrasi]);
+      const result = await db.query(query, [noClaim]);
       return result.rows[0];
     } catch (error) {
       console.error('Model error - getRegistrasiByNoReg:', error);
@@ -257,10 +257,10 @@ class AdmedikaModel {
           id, no_registrasi, no_claim, benefit_id, benefit_name,
           kode_item, nama_item, qty, total_amount
         FROM transaksi_pasien_admedika
-        WHERE no_registrasi = $1
+        WHERE no_claim = $1
         ORDER BY benefit_id, id
       `;
-      const result = await db.query(query, [noRegistrasi]);
+      const result = await db.query(query, [noClaim]);
       return result.rows;
     } catch (error) {
       console.error('Model error - getTransaksiByNoReg:', error);
@@ -924,7 +924,7 @@ class AdmedikaModel {
           icd10 = $8,
           claim_status = $9,
           claim_desc = $10
-        WHERE no_registrasi = $11
+        WHERE no_claim = $11
         RETURNING *
       `;
 
@@ -971,7 +971,7 @@ class AdmedikaModel {
       const checkQuery = `
         SELECT COUNT(*) as count
         FROM transaksi_pasien_admedika
-        WHERE no_registrasi = $1 AND no_claim = $2 AND kode_item = $3
+        WHERE no_claim = $1 AND no_claim = $2 AND kode_item = $3
       `;
 
       const insertQuery = `
@@ -1213,9 +1213,9 @@ class AdmedikaModel {
   }
 
   /**
-   * Get upload document history by no_registrasi
+   * Get upload document history by no_claim
    */
-  async getUploadHistoryByNoRegistrasi(noRegistrasi) {
+  async getUploadHistoryByNoClaim(noClaim) {
     try {
       const query = `
         SELECT
@@ -1233,14 +1233,14 @@ class AdmedikaModel {
           uploaded_by,
           created_at
         FROM upload_document_admedika
-        WHERE no_registrasi = $1
+        WHERE no_claim = $1
         ORDER BY created_at DESC
       `;
 
-      const result = await db.query(query, [noRegistrasi]);
+      const result = await db.query(query, [noClaim]);
       return result.rows;
     } catch (error) {
-      console.error('Model error - getUploadHistoryByNoRegistrasi:', error);
+      console.error('Model error - getUploadHistoryByNoClaim:', error);
       throw error;
     }
   }
