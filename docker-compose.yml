@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: sysdev@2025
       POSTGRES_DB: bridging_asuransi_minut
     ports:
-      - "5437:5432"
+      - "5438:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init-db:/docker-entrypoint-initdb.d  # Untuk restore backup
@@ -58,8 +58,10 @@ services:
       - S3_SECRET_KEY=${S3_SECRET_KEY}
       - S3_BUCKET=${S3_BUCKET}
       - S3_REGION=${S3_REGION}
+      # Site Config
+      - SITE_NAME=${SITE_NAME}
     ports:
-      - "0.0.0.0:3005:3000"  # Bind to all interfaces
+      - "0.0.0.0:3006:3000"  # Bind to all interfaces
     depends_on:
       postgres:
         condition: service_healthy

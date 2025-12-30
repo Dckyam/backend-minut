@@ -16,6 +16,7 @@ class S3Service {
     });
 
     this.bucketName = process.env.S3_BUCKET || 'smhg-extensions-doc';
+    this.siteName = process.env.SITE_NAME || 'general';
   }
 
   /**
@@ -28,12 +29,12 @@ class S3Service {
    */
   async uploadFile(fileBuffer, fileName, contentType, metadata = {}) {
     try {
-      // Generate unique key: documents/{no_claim}/{timestamp}_{filename}
+      // Generate unique key: {site_name}/{no_claim}/{timestamp}_{filename}
       const timestamp = Date.now();
       const sanitizedFileName = fileName.replace(/[^a-zA-Z0-9.-]/g, '_');
       const s3Key = metadata.no_claim
-        ? `documents/${metadata.no_claim}/${timestamp}_${sanitizedFileName}`
-        : `documents/general/${timestamp}_${sanitizedFileName}`;
+        ? `${this.siteName}/${metadata.no_claim}/${timestamp}_${sanitizedFileName}`
+        : `${this.siteName}/general/${timestamp}_${sanitizedFileName}`;
 
       console.log('📤 Uploading file to S3:', {
         bucket: this.bucketName,
