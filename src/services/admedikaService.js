@@ -1105,10 +1105,10 @@ class AdmedikaService {
       // Create FormData
 
       // Per dokumentasi EDOCS_UPLOAD - menggunakan form-data standard:
-      // - Field 'data' berisi complete JSON input request format
+      // - Field 'data' berisi complete JSON request format (FULL apiPayload, bukan hanya input)
       // - Field 'files' berisi file source (binary file)
       const formData = new FormData();
-      const dataPayload = JSON.stringify(apiPayload.input);
+      const dataPayload = JSON.stringify(apiPayload);
       formData.append('data', dataPayload);
 
       // Send file as binary buffer (standard multipart/form-data)
