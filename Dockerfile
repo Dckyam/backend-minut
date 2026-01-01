@@ -10,8 +10,8 @@ RUN apk add --no-cache \
     bash \
     tzdata
 
-# Set timezone to Asia/Jakarta (WIB)
-ENV TZ=Asia/Jakarta
+# Set timezone to Asia/Makassar (WITA - UTC+8)
+ENV TZ=Asia/Makassar
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Copy package files
