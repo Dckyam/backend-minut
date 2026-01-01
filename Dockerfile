@@ -28,8 +28,8 @@ RUN mkdir -p /app/scripts
 COPY scripts/backup-to-s3.sh /app/scripts/
 RUN chmod +x /app/scripts/backup-to-s3.sh
 
-# Setup cron job (daily backup at 12:20 PM WITA for testing)
-RUN echo "20 12 * * * /app/scripts/backup-to-s3.sh >> /var/log/backup.log 2>&1" > /etc/crontabs/root
+# Setup cron job (daily backup at 02:00 AM WITA)
+RUN echo "0 2 * * * /app/scripts/backup-to-s3.sh >> /var/log/backup.log 2>&1" > /etc/crontabs/root
 
 # Create log file
 RUN touch /var/log/backup.log
