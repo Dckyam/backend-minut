@@ -5,8 +5,8 @@
 
 set -e
 
-# Load environment variables
-source /app/.env
+# Environment variables are already loaded from Docker
+# No need to source .env file
 
 # Configuration
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
