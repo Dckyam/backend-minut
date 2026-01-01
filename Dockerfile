@@ -2,12 +2,17 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Install system dependencies (postgresql-client, aws-cli, cron)
+# Install system dependencies (postgresql-client, aws-cli, cron, timezone)
 RUN apk add --no-cache \
     postgresql-client \
     aws-cli \
     dcron \
-    bash
+    bash \
+    tzdata
+
+# Set timezone to Asia/Jakarta (WIB)
+ENV TZ=Asia/Jakarta
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Copy package files
 COPY package*.json ./
