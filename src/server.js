@@ -6,6 +6,7 @@ const authRoutes = require('./routes/auth');
 const admedikaRoutes = require('./routes/admedika');
 const simrsRoutes = require('./routes/simrs');
 const menuAccessRoutes = require('./routes/menuAccess');
+const extensionUpdateRoutes = require('./routes/extensionUpdateRoutes');
 
 // Initialize SIMRS database connection pool
 const dbSimrs = require('./database/dbSimrs');
@@ -52,6 +53,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/admedika', admedikaRoutes);
 app.use('/api/simrs', simrsRoutes);
 app.use('/api/menu-access', menuAccessRoutes);
+app.use('/api/extension/updates', extensionUpdateRoutes);
 
 // 404 handler
 app.use((req, res) => {

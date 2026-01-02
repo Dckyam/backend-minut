@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "build_date": "2026-01-02",
+  "changelog": {
+    "1.0.0": [
+      "Initial version with SSE real-time update system",
+      "Hospital name and terminal ID configuration via environment variables",
+      "Admedika eligibility and discharge features"
+    ]
+  }
+}
