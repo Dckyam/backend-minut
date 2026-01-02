@@ -38,7 +38,7 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
   res.json({
     success: true,
-    message: 'Backend Pendaftaran Cibinong API',
+    message: 'Backend Pendaftaran Minut API',
     version: '1.0.0',
     timestamp: new Date().toISOString()
   });
