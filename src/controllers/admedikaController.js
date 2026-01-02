@@ -593,7 +593,7 @@ class AdmedikaController {
       // Provider info
       doc.fontSize(9)
          .font('Helvetica')
-         .text('Provider : ' + (process.env.HOSPITAL_NAME || 'RS SENTRA MEDIKA MANADO')), 50, y);
+         .text('Provider : ' + (process.env.HOSPITAL_NAME || 'RS SENTRA MEDIKA MANADO'), 50, y);
 
       y += 15;
       doc.text('Terminal ID : ' + (process.env.ADMEDIKA_TERMINAL_ID || '12389773'), 50, y);
@@ -1000,7 +1000,7 @@ class AdmedikaController {
       // Provider info
       doc.fontSize(9)
          .font('Helvetica')
-         .text('Provider : ' + (process.env.HOSPITAL_NAME || 'RS SENTRA MEDIKA MANADO')), 50, y);
+         .text('Provider : ' + (process.env.HOSPITAL_NAME || 'RS SENTRA MEDIKA MANADO'), 50, y);
 
       y += 15;
       doc.text('Terminal ID : ' + (process.env.ADMEDIKA_TERMINAL_ID || '12389773'), 50, y);
