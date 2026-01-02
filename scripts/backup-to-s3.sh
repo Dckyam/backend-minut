@@ -58,7 +58,10 @@ if [ $? -eq 0 ]; then
 
         # Keep only last 7 days of backups in S3
         echo "[$(date)] Cleaning old backups (keeping last 7 days)..."
-        CUTOFF_DATE=$(date -d '7 days ago' +%Y%m%d)
+
+        # Calculate cutoff date (7 days ago) - Alpine Linux compatible
+        CUTOFF_TIMESTAMP=$(($(date +%s) - 7*24*60*60))
+        CUTOFF_DATE=$(date -d @${CUTOFF_TIMESTAMP} +%Y%m%d 2>/dev/null || date -r ${CUTOFF_TIMESTAMP} +%Y%m%d)
 
         AWS_ACCESS_KEY_ID=${S3_ACCESS_KEY} \
         AWS_SECRET_ACCESS_KEY=${S3_SECRET_KEY} \
