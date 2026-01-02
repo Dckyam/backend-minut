@@ -1,6 +1,6 @@
 const express = require('express');
-const path = require('path');
 const cors = require('cors');
+const path = require('path');
 const config = require('./config/config');
 
 const authRoutes = require('./routes/auth');
@@ -24,6 +24,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 // Serve static files (for extension downloads)
 app.use(express.static(path.join(__dirname, '../public')));
 
@@ -130,6 +131,11 @@ async function startServer() {
       console.log(`  GET    http://localhost:${PORT}/api/admedika/coverage-types`);
       console.log(`  POST   http://localhost:${PORT}/api/admedika/eligibility`);
       console.log(`  POST   http://localhost:${PORT}/api/admedika/discharge-op`);
+      console.log('');
+      console.log('🔔 Extension Updates (SSE):');
+      console.log(`  GET    http://localhost:${PORT}/api/extension/updates/stream`);
+      console.log(`  POST   http://localhost:${PORT}/api/extension/updates/trigger`);
+      console.log(`  GET    http://localhost:${PORT}/api/extension/updates/stats`);
       console.log('=================================');
     });
   } catch (error) {
