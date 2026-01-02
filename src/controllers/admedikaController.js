@@ -593,7 +593,7 @@ class AdmedikaController {
       // Provider info
       doc.fontSize(9)
          .font('Helvetica')
-         .text('Provider : RS SENTRA MEDIKA CIBINONG', 50, y);
+         .text('Provider : ' + (process.env.HOSPITAL_NAME || 'RS SENTRA MEDIKA MANADO')), 50, y);
 
       y += 15;
       doc.text('Terminal ID : 12389773', 50, y);
@@ -785,7 +785,7 @@ class AdmedikaController {
         success: true,
         data: {
           title: isReprint ? 'Re-Print Letter of Authorization' : 'Letter of Authorization',
-          provider: 'RS SENTRA MEDIKA CIBINONG',
+          provider: process.env.HOSPITAL_NAME || 'RS SENTRA MEDIKA MANADO',
           terminalId: '12389773',
           dateTime: formattedRegDate,
           patientName: eligibility.patientName || '-',
@@ -884,7 +884,7 @@ class AdmedikaController {
         success: true,
         data: {
           title: isReprint ? 'Re-Print Letter of Confirmation' : 'Letter of Confirmation',
-          provider: 'RS SENTRA MEDIKA CIBINONG',
+          provider: process.env.HOSPITAL_NAME || 'RS SENTRA MEDIKA MANADO',
           terminalId: '12389773',
           dateTime: formattedRegDate,
           patientName: discharge.patientName || '-',
@@ -1000,7 +1000,7 @@ class AdmedikaController {
       // Provider info
       doc.fontSize(9)
          .font('Helvetica')
-         .text('Provider : RS SENTRA MEDIKA CIBINONG', 50, y);
+         .text('Provider : ' + (process.env.HOSPITAL_NAME || 'RS SENTRA MEDIKA MANADO')), 50, y);
 
       y += 15;
       doc.text('Terminal ID : 12389773', 50, y);
