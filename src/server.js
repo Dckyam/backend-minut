@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 const config = require('./config/config');
 
@@ -23,6 +24,8 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// Serve static files (for extension downloads)
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Request logging middleware
 app.use((req, res, next) => {
