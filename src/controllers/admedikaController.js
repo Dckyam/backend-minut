@@ -596,7 +596,7 @@ class AdmedikaController {
          .text('Provider : ' + (process.env.HOSPITAL_NAME || 'RS SENTRA MEDIKA MANADO')), 50, y);
 
       y += 15;
-      doc.text('Terminal ID : 12389773', 50, y);
+      doc.text('Terminal ID : ' + (process.env.ADMEDIKA_TERMINAL_ID || '12389773'), 50, y);
 
       y += 15;
       // Date and Time dari registrasi (created_date)
@@ -786,7 +786,7 @@ class AdmedikaController {
         data: {
           title: isReprint ? 'Re-Print Letter of Authorization' : 'Letter of Authorization',
           provider: process.env.HOSPITAL_NAME || 'RS SENTRA MEDIKA MANADO',
-          terminalId: '12389773',
+          terminalId: process.env.ADMEDIKA_TERMINAL_ID || '12389773',
           dateTime: formattedRegDate,
           patientName: eligibility.patientName || '-',
           referenceID: eligibility.clID || '-',
@@ -885,7 +885,7 @@ class AdmedikaController {
         data: {
           title: isReprint ? 'Re-Print Letter of Confirmation' : 'Letter of Confirmation',
           provider: process.env.HOSPITAL_NAME || 'RS SENTRA MEDIKA MANADO',
-          terminalId: '12389773',
+          terminalId: process.env.ADMEDIKA_TERMINAL_ID || '12389773',
           dateTime: formattedRegDate,
           patientName: discharge.patientName || '-',
           referenceID: discharge.clID || '-',
@@ -1003,7 +1003,7 @@ class AdmedikaController {
          .text('Provider : ' + (process.env.HOSPITAL_NAME || 'RS SENTRA MEDIKA MANADO')), 50, y);
 
       y += 15;
-      doc.text('Terminal ID : 12389773', 50, y);
+      doc.text('Terminal ID : ' + (process.env.ADMEDIKA_TERMINAL_ID || '12389773'), 50, y);
 
       y += 15;
       // Date and Time dari registrasi (created_date)
