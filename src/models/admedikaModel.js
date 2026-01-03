@@ -816,6 +816,7 @@ class AdmedikaModel {
     try {
       const query = `
         SELECT DISTINCT
+          reg.tanggal_registrasi as tanggal_registrasi_raw,
           to_char(reg.tanggal_registrasi, 'YYYY-MM-DD') as tanggal_registrasi,
           reg.no_registrasi,
           reg.no_mr,
@@ -851,6 +852,7 @@ class AdmedikaModel {
     try {
       const query = `
         SELECT DISTINCT
+          reg.tanggal_registrasi as tanggal_registrasi_raw,
           to_char(reg.tanggal_registrasi, 'YYYY-MM-DD') as tanggal_registrasi,
           reg.no_registrasi,
           reg.no_mr,
