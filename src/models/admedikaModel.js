@@ -70,15 +70,16 @@ class AdmedikaModel {
     try {
       const query = `
         SELECT
-          id, tanggal_registrasi, no_registrasi, no_mr, no_claim, no_kartu,
+          id, to_char(tanggal_registrasi, 'YYYY-MM-DD') as tanggal_registrasi,
+          no_registrasi, no_mr, no_claim, no_kartu,
           nama_pasien, tanggal_lahir, coverage_id, coverage_code, coverage_desc,
           nama_layanan, dokter, penjamin, icd10, amount, acc_amount, decline_amount,
           claim_status, claim_desc, is_void, void_by, void_date, void_remarks,
           is_claim, claim_by, claim_date, created_by, created_date
         FROM registrasi_pasien_admedika
-        WHERE no_claim = $1 AND is_void = 0
+        WHERE no_registrasi = $1 AND is_void = 0
       `;
-      const result = await db.query(query, [noClaim]);
+      const result = await db.query(query, [noRegistrasi]);
       return result.rows[0];
     } catch (error) {
       console.error('Model error - getRegistrasiByNoReg:', error);
@@ -93,7 +94,8 @@ class AdmedikaModel {
     try {
       const query = `
         SELECT
-          id, tanggal_registrasi, no_registrasi, no_mr, no_claim, no_kartu,
+          id, to_char(tanggal_registrasi, 'YYYY-MM-DD') as tanggal_registrasi,
+          no_registrasi, no_mr, no_claim, no_kartu,
           nama_pasien, tanggal_lahir, coverage_id, coverage_code, coverage_desc,
           nama_layanan, dokter, penjamin, icd10, amount, acc_amount, decline_amount,
           claim_status, claim_desc, is_void, void_by, void_date, void_remarks,
@@ -139,7 +141,8 @@ class AdmedikaModel {
     try {
       const query = `
         SELECT
-          id, tanggal_registrasi, no_registrasi, no_mr, no_claim, no_kartu,
+          id, to_char(tanggal_registrasi, 'YYYY-MM-DD') as tanggal_registrasi,
+          no_registrasi, no_mr, no_claim, no_kartu,
           nama_pasien, nama_layanan, dokter, penjamin,
           is_void, is_claim, void_date, void_by, void_remarks,
           claim_date, claim_by, created_date
@@ -257,10 +260,10 @@ class AdmedikaModel {
           id, no_registrasi, no_claim, benefit_id, benefit_name,
           kode_item, nama_item, qty, total_amount
         FROM transaksi_pasien_admedika
-        WHERE no_claim = $1
+        WHERE no_registrasi = $1
         ORDER BY benefit_id, id
       `;
-      const result = await db.query(query, [noClaim]);
+      const result = await db.query(query, [noRegistrasi]);
       return result.rows;
     } catch (error) {
       console.error('Model error - getTransaksiByNoReg:', error);
@@ -813,7 +816,7 @@ class AdmedikaModel {
     try {
       const query = `
         SELECT DISTINCT
-          reg.tanggal_registrasi,
+          to_char(reg.tanggal_registrasi, 'YYYY-MM-DD') as tanggal_registrasi,
           reg.no_registrasi,
           reg.no_mr,
           reg.nama_pasien,
@@ -824,10 +827,10 @@ class AdmedikaModel {
           r.is_claim,
           r.id
         FROM response_api_admedika r
-        INNER JOIN registrasi_pasien_admedika reg 
-          ON r.no_mr = reg.no_mr 
+        INNER JOIN registrasi_pasien_admedika reg
+          ON r.no_mr = reg.no_mr
           AND r.no_registrasi = reg.no_registrasi
-        WHERE r.no_mr = $1 
+        WHERE r.no_mr = $1
           AND reg.is_void = 0
           AND r.is_eligibility = 1
         ORDER BY reg.tanggal_registrasi DESC, r.id DESC
@@ -848,7 +851,7 @@ class AdmedikaModel {
     try {
       const query = `
         SELECT DISTINCT
-          reg.tanggal_registrasi,
+          to_char(reg.tanggal_registrasi, 'YYYY-MM-DD') as tanggal_registrasi,
           reg.no_registrasi,
           reg.no_mr,
           reg.nama_pasien,
@@ -924,7 +927,7 @@ class AdmedikaModel {
           icd10 = $8,
           claim_status = $9,
           claim_desc = $10
-        WHERE no_claim = $11
+        WHERE no_registrasi = $11
         RETURNING *
       `;
 
@@ -971,7 +974,7 @@ class AdmedikaModel {
       const checkQuery = `
         SELECT COUNT(*) as count
         FROM transaksi_pasien_admedika
-        WHERE no_claim = $1 AND no_claim = $2 AND kode_item = $3
+        WHERE no_registrasi = $1 AND no_claim = $2 AND kode_item = $3
       `;
 
       const insertQuery = `
