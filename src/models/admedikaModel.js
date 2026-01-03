@@ -1219,9 +1219,16 @@ class AdmedikaModel {
 
   /**
    * Get upload document history by no_claim
+   * Also handles NULL/empty no_claim for temporary registrations
    */
   async getUploadHistoryByNoClaim(noClaim) {
     try {
+      // If no_claim is null/undefined/empty, return empty array
+      if (!noClaim || noClaim === 'null' || noClaim === 'undefined') {
+        console.log('getUploadHistoryByNoClaim: no_claim is empty, returning empty array');
+        return [];
+      }
+
       const query = `
         SELECT
           id,
