@@ -790,6 +790,7 @@ class AdmedikaController {
           dateTime: formattedRegDate,
           patientName: eligibility.patientName || '-',
           referenceID: eligibility.clID || '-',
+          cardNo: eligibility.cardNo || '-',
           printOut: printOutLines.join('\n'),
           footerText: footerText,
           scanText: 'Scan your Reference ID'
@@ -889,6 +890,7 @@ class AdmedikaController {
           dateTime: formattedRegDate,
           patientName: discharge.patientName || '-',
           referenceID: discharge.clID || '-',
+          cardNo: discharge.cardNo || '-',
           printOut: printOutLines.join('\n'),
           footerText: footerText,
           scanText: 'Scan your Reference ID'
