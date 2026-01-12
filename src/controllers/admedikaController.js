@@ -606,6 +606,9 @@ class AdmedikaController {
       doc.text(`Patient Name : ${eligibility.patientName || '-'}`, 50, y);
 
       y += 15;
+      doc.text(`Card No : ${eligibility.cardNo || '-'}`, 50, y);
+
+      y += 15;
       doc.text(`Reference ID : ${eligibility.clID || '-'}`, 50, y);
 
       y += 30;
