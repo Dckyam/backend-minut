@@ -2,6 +2,8 @@ const admedikaService = require('../services/admedikaService');
 const PDFDocument = require('pdfkit');
 const bwipjs = require('bwip-js');
 const db = require('../config/database');
+const path = require('path');
+const fs = require('fs');
 
 class AdmedikaController {
   /**
