@@ -1018,6 +1018,9 @@ class AdmedikaController {
       doc.text(`Patient Name : ${discharge.patientName || '-'}`, 50, y);
 
       y += 15;
+      doc.text(`Card No : ${discharge.cardNo || '-'}`, 50, y);
+
+      y += 15;
       doc.text(`Reference ID : ${discharge.clID || '-'}`, 50, y);
 
       y += 30;
